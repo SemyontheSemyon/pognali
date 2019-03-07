@@ -1,4 +1,4 @@
-package org.pognali.Models;
+package org.pognali.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

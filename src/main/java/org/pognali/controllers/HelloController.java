@@ -1,10 +1,10 @@
-package org.pognali.Controllers;
+package org.pognali.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.pognali.Models.Hello;
-import org.pognali.Repositories.HelloRepository;
+import org.pognali.models.Hello;
+import org.pognali.repositories.HelloRepository;
 
 import java.util.List;
 
