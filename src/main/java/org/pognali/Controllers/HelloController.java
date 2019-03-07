@@ -1,10 +1,10 @@
-package pognali.Controllers;
+package org.pognali.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pognali.Models.Hello;
-import pognali.Repositories.HelloRepository;
+import org.pognali.Models.Hello;
+import org.pognali.Repositories.HelloRepository;
 
 import java.util.List;
 
@@ -19,8 +19,7 @@ public class HelloController {
 
         List<Hello> helloList = (List)helloRepository.findAll();
         String newHelloText = "Hello #" + (helloList.size()+1);
-        Hello newHello = new Hello(newHelloText);
-        helloRepository.save(newHello);
+        helloRepository.save(new Hello(newHelloText));
 
         return (List)helloRepository.findAll();
 
