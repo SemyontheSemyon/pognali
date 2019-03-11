@@ -2,6 +2,8 @@ package org.pognali.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.pognali.models.Hello;
 import org.pognali.repositories.HelloRepository;
@@ -14,15 +16,17 @@ public class HelloController {
     @Autowired
     HelloRepository helloRepository;
 
-    @GetMapping("/")
-    List<Hello> hello(){
-
-        List<Hello> helloList = (List)helloRepository.findAll();
-        String newHelloText = "Hello #" + (helloList.size()+1);
-        helloRepository.save(new Hello(newHelloText));
+    @GetMapping("/get")
+    List<Hello> getHellos(){
 
         return (List)helloRepository.findAll();
 
     }
 
+    @PostMapping("/post")
+    Hello postHello(@RequestBody Hello hello){
+
+        return helloRepository.save(hello);
+
+    }
 }
