@@ -17,7 +17,7 @@ public class Hello {
 
     private String text;
 
-    private Hello(){}
+    private Hello() {}
 
     public Hello(String text) {
         this.text = text;

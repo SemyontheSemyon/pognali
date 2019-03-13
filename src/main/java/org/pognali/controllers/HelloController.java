@@ -1,10 +1,8 @@
 package org.pognali.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.pognali.models.Hello;
 import org.pognali.repositories.HelloRepository;
 
@@ -16,17 +14,40 @@ public class HelloController {
     @Autowired
     HelloRepository helloRepository;
 
-    @GetMapping("/get")
-    List<Hello> getHellos(){
+    @GetMapping("hello/get")
+    List<Hello> getHellos() {
 
         return (List)helloRepository.findAll();
 
     }
 
-    @PostMapping("/post")
-    Hello postHello(@RequestBody Hello hello){
+    @PostMapping("hello/add")
+    Hello addHello(@RequestBody Hello hello) {
 
         return helloRepository.save(hello);
+
+    }
+
+    @PostMapping("hello/{id}/update")
+    Hello updateHello(@PathVariable Long helloId,
+                      @RequestBody Hello helloRequest) {
+
+        return helloRepository.findById(helloId)
+                .map(hello -> {
+                    hello.setText(helloRequest.getText());
+                    return helloRepository.save(hello);
+                }).orElseThrow(RuntimeException::new);
+
+    }
+
+    @DeleteMapping("hello/{id}/delete")
+    ResponseEntity deleteHello(@PathVariable Long helloId) {
+
+        return helloRepository.findById(helloId)
+                .map(hello -> {
+                    helloRepository.delete(hello);
+                    return ResponseEntity.ok().build();
+                }).orElseThrow(RuntimeException::new);
 
     }
 }

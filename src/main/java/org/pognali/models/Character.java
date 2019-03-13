@@ -25,9 +25,9 @@ public class Character {
     @JsonIgnore
     private Hello hello;
 
-    private Character(){}
+    private Character() {}
 
-    public Character(String name, Hello hello){
+    public Character(String name, Hello hello) {
         this.name = name;
         this.hello = hello;
     }
